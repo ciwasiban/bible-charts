@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+    var $UrlGetData = window.location.origin + 'getDataFromWeb.php'; // script 網路佈署的網址
+    var $UrlGoogleSheets = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTeo6NONZFWdM8hpKuu4dyMP6Scx8qK1lz_fQG1PjBQdkQ3gXJm5IQF-Gh4Wzl8gG2HBhmdYGmsMxne/pubhtml?gid=664118286&single=true';
+    $('#source').html("<p>資料來源: <a href='" + $UrlGoogleSheets  + "'>Bible Charts Google Sheets</a></p>");
+
+    var parameter = {
+        url: $UrlGoogleSheets
+    };
+
+    var jqxhr = $.post( "getDataFromWeb.php", parameter, function(data) {
+        //alert( "success: " + data);
+        $( "#xx" ).html(data);
+        var mmm = data;
+        var chart = new CanvasJS.Chart("chartContainer", {
+                title:{
+                    text:"2017 讀經進度 (From 2017.9.7)"
+                },
+                animationEnabled: true,
+                axisX:{
+                    interval: 1,
+                    labelFontSize: 10,
+                    lineThickness: 0
+                },
+                axisY2:{
+                    valueFormatString: "0 章",
+                    lineThickness: 0
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend:{
+                    verticalAlign: "top",
+                    horizontalAlign: "center"
+                },
+                data: data
+                });
+            chart.render();
+    }, "json")
+    .done(function() {
+        //alert( "second success" );
+    })
+    .fail(function() {
+        alert( "error" );
+    })
+    .always(function() {
+        //alert( "finished" );
+    });
+}
+
+
+function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+
+function renderCharts(data) {
+    
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="source">xxx</div>
+</body>
+
+</html>
