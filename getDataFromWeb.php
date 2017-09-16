@@ -35,6 +35,7 @@ function generateJsData($data) {
             'luminosity' => array('light'),
             'hue' => 'random'
             ));
+    $colors2 = array('#7E8F74', '#F0E6A7', '#EBB88A', '#ff9999', '#ff4d4d', '#ccccff', '#6666ff', '#ebccff', '#c266ff', '#ccffe6', '#00e673');
 
     if (is_array($data)) {
         foreach ($data AS $chart => $row) {
@@ -44,7 +45,8 @@ function generateJsData($data) {
             $item['showInLegend'] = true;
             $item['name'] = $chart;
             $item['axisYType'] = "secondary";
-            $item['color'] = $colors[$i%30];
+            //$item['color'] = $colors[$i%30];
+            $item['color'] = $colors2[$i%11];
             $item['dataPoints'] = array();
             foreach ($row AS $name => $num) {
                 //$mm = ["小潘"=>3, "曉芬"=>1, "佳珊"=>2];
