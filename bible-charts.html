@@ -5,7 +5,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 window.onload = function () {
-    var $UrlGetData = window.location.origin + 'getDataFromWeb.php'; // script 網路佈署的網址
     var $UrlGoogleSheets = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTeo6NONZFWdM8hpKuu4dyMP6Scx8qK1lz_fQG1PjBQdkQ3gXJm5IQF-Gh4Wzl8gG2HBhmdYGmsMxne/pubhtml?gid=664118286&single=true';
     $('#source').html("<p>資料來源: <a href='" + $UrlGoogleSheets  + "'>Bible Charts Google Sheets</a></p>");
 
@@ -51,20 +50,6 @@ window.onload = function () {
     .always(function() {
         //alert( "finished" );
     });
-}
-
-
-function json2array(json){
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function(key){
-        result.push(json[key]);
-    });
-    return result;
-}
-
-function renderCharts(data) {
-    
 }
 </script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
