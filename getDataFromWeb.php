@@ -5,6 +5,9 @@ define("IS_DEBUG", false);
 define("VENDOR_DIR", __DIR__ . "/vendor/simplehtmldom_1_5/");
 
 require "simple_html_dom.php";
+require "RandomColor.php";
+
+use \Colors\RandomColor;
 
 if (IS_DEBUG) {
     $url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTeo6NONZFWdM8hpKuu4dyMP6Scx8qK1lz_fQG1PjBQdkQ3gXJm5IQF-Gh4Wzl8gG2HBhmdYGmsMxne/pubhtml?gid=664118286&single=true";
@@ -27,7 +30,12 @@ echo $str = generateJsData($data2);
 function generateJsData($data) {
     $jsData = $indexOfName = array();
     $i = 0;
-    $color = array('#7E8F74', '#F0E6A7', '#EBB88A', '#ff9999', '#ff4d4d', '#ccccff', '#6666ff', '#ebccff', '#c266ff', '#ccffe6', '#00e673');
+
+    $colors = RandomColor::many(30, array(
+            'luminosity' => array('light'),
+            'hue' => 'random'
+            ));
+
     if (is_array($data)) {
         foreach ($data AS $chart => $row) {
             $item = array();
@@ -36,7 +44,7 @@ function generateJsData($data) {
             $item['showInLegend'] = true;
             $item['name'] = $chart;
             $item['axisYType'] = "secondary";
-            $item['color'] = $color[$i%11];
+            $item['color'] = $colors[$i%30];
             $item['dataPoints'] = array();
             foreach ($row AS $name => $num) {
                 //$mm = ["小潘"=>3, "曉芬"=>1, "佳珊"=>2];
