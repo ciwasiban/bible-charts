@@ -46,7 +46,7 @@ function generateJsData($data) {
             $item['name'] = $chart;
             $item['axisYType'] = "secondary";
             //$item['color'] = $colors[$i%30];
-            $item['color'] = $colors2[$i%11];
+            $item['color'] = $colors2[$i%(count($colors2))];
             $item['dataPoints'] = array();
             foreach ($row AS $name => $num) {
                 //$mm = ["小潘"=>3, "曉芬"=>1, "佳珊"=>2];
