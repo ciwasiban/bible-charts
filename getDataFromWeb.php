@@ -35,7 +35,7 @@ function generateJsData($data) {
             'luminosity' => array('light'),
             'hue' => 'random'
             ));
-    $colors2 = array('#7E8F74', '#F0E6A7', '#EBB88A', '#ff9999', '#ff4d4d', '#ccccff', '#6666ff', '#ebccff', '#c266ff', '#ccffe6', '#00e673');
+    $colors2 = array('#7E8F74', '#F0E6A7', '#EBB88A', '#ff9999', '#ff4d4d', '#ccccff', '#6666ff', '#ebccff', '#c266ff', '#ccffe6', '#00e673', '#f4a742', '#edbb7b');
 
     if (is_array($data)) {
         foreach ($data AS $chart => $row) {
