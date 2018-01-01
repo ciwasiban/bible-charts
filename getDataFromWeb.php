@@ -78,7 +78,7 @@ function dataHandler($data) {
             $date = $row[2];
 
             if (!isset($userTotal[$chart])) {
-                $userTotal[$chart] = ['小潘'=> 0, '曉芬'=> 0, '佳珊'=> 0];
+                $userTotal[$chart] = ['小潘'=> 0, '曉芬'=> 0, '佳珊'=> 0, '玉枝'=>0];
             }
 
             if (!isset($userTotal[$chart][$user])) {
