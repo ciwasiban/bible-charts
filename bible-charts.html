@@ -4,19 +4,56 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+var $UrlGoogleSheets2017 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTeo6NONZFWdM8hpKuu4dyMP6Scx8qK1lz_fQG1PjBQdkQ3gXJm5IQF-Gh4Wzl8gG2HBhmdYGmsMxne/pubhtml?gid=664118286&single=true';
+var $UrlGoogleSheets2018 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTd5Eq-Pw4czF1zxvr5dn8WOYPmIptKXyfUvqZy9iwqNyozsdyAdHuOV6QcskGtXoCAvO_Iqjzr_ERD/pubhtml?gid=1391861286&single=true';
+var $year = 'blabla';
+
+function getYear() {
+    var url = new URL(window.location.href);
+    var $year = url.searchParams.get("year");
+    return $year;
+    var $UrlSheets = '';
+    switch ($year) {
+        case '2018':
+            $UrlSheets=$UrlGoogleSheets2018;
+            break;
+        default:
+            $UrlSheets=$UrlGoogleSheets2017;
+            break;
+    }
+    alert($UrlSheets);
+    return $UrlSheets;
+}
+
 window.onload = function () {
-    var $UrlGoogleSheets = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTeo6NONZFWdM8hpKuu4dyMP6Scx8qK1lz_fQG1PjBQdkQ3gXJm5IQF-Gh4Wzl8gG2HBhmdYGmsMxne/pubhtml?gid=664118286&single=true';
-    $('#source').html("<p>資料來源: <a href='" + $UrlGoogleSheets  + "'>Bible Charts Google Sheets</a></p>");
+    $year = getYear();
+    $text = 'redering...';
+
+    var $UrlSheets = '';
+    switch ($year) {
+        case '2018':
+            $text = '2018 讀經進度';
+            $Url=$UrlGoogleSheets2018;
+            break;
+        default:
+            $text = '2017 讀經進度 (From 2017.9.7)';
+            $Url=$UrlGoogleSheets2017;
+            break;
+    }
+
+    $('#source').html("<p>資料來源: <a href='" + $Url  + "'>Bible Charts Google Sheets</a></p>");
 
     var parameter = {
-        url: $UrlGoogleSheets
+        url: $Url
     };
 
     var jqxhr = $.post( "getDataFromWeb.php", parameter, function(data) {
         //alert( "success: " + data);
         var chart = new CanvasJS.Chart("chartContainer", {
                 title:{
-                    text:"2017 讀經進度 (From 2017.9.7)"
+                    text:$text
+
                 },
                 animationEnabled: true,
                 axisX:{
